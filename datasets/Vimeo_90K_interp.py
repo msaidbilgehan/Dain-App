@@ -1,8 +1,8 @@
 import os.path
-import random
 # import glob
 import math
 from .listdatasets import ListDataset,Vimeo_90K_loader
+import secrets
 
 
 def make_dataset(root, list_file):
@@ -11,7 +11,7 @@ def make_dataset(root, list_file):
     # print("The last sample is : " + raw_im_list[-1])
     raw_im_list = raw_im_list[:-1]
     assert len(raw_im_list) > 0
-    random.shuffle(raw_im_list)
+    secrets.SystemRandom().shuffle(raw_im_list)
 
     return  raw_im_list
 

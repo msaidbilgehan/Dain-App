@@ -3,14 +3,14 @@ import os
 import os.path
 from cv2 import imread
 import numpy as np
-import random
+import secrets
 
 def Vimeo_90K_loader(root, im_path, input_frame_size = (3, 256, 448), output_frame_size = (3, 256, 448), data_aug = True):
 
 
     root = os.path.join(root,'sequences',im_path)
 
-    if data_aug and random.randint(0, 1):
+    if data_aug and secrets.SystemRandom().randint(0, 1):
         path_pre2 = os.path.join(root,  "im1.png")
         path_mid = os.path.join(root,  "im2.png")
         path_pre1 = os.path.join(root,  "im3.png")
@@ -23,19 +23,19 @@ def Vimeo_90K_loader(root, im_path, input_frame_size = (3, 256, 448), output_fra
     im_pre1 = imread(path_pre1)
     im_mid = imread(path_mid)
 
-    h_offset = random.choice(range(256 - input_frame_size[1] + 1))
-    w_offset = random.choice(range(448 - input_frame_size[2] + 1))
+    h_offset = secrets.SystemRandom().choice(range(256 - input_frame_size[1] + 1))
+    w_offset = secrets.SystemRandom().choice(range(448 - input_frame_size[2] + 1))
 
     im_pre2 = im_pre2[h_offset:h_offset + input_frame_size[1], w_offset: w_offset + input_frame_size[2], :]
     im_pre1 = im_pre1[h_offset:h_offset + input_frame_size[1], w_offset: w_offset + input_frame_size[2], :]
     im_mid = im_mid[h_offset:h_offset + input_frame_size[1], w_offset: w_offset + input_frame_size[2], :]
 
     if data_aug:
-        if random.randint(0, 1):
+        if secrets.SystemRandom().randint(0, 1):
             im_pre2 = np.fliplr(im_pre2)
             im_mid = np.fliplr(im_mid)
             im_pre1 = np.fliplr(im_pre1)
-        if random.randint(0, 1):
+        if secrets.SystemRandom().randint(0, 1):
             im_pre2 = np.flipud(im_pre2)
             im_mid = np.flipud(im_mid)
             im_pre1 = np.flipud(im_pre1)

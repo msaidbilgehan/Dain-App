@@ -3,8 +3,6 @@ import os
 from torch.autograd import Variable
 import math
 import torch
-
-import random
 import numpy as np
 import numpy
 import networks
@@ -12,6 +10,7 @@ from my_args import  args
 
 from scipy.misc import imread, imsave
 from AverageMeter import  *
+import secrets
 
 torch.backends.cudnn.benchmark = True # to speed up the
 
@@ -63,7 +62,7 @@ model = model.eval() # deploy mode
 use_cuda=args.use_cuda
 save_which=args.save_which
 dtype = args.dtype
-unique_id =str(random.randint(0, 100000))
+unique_id =str(secrets.SystemRandom().randint(0, 100000))
 print("The unique id for current testing is: " + str(unique_id))
 
 interp_error = AverageMeter()
