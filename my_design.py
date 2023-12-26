@@ -497,9 +497,8 @@ class My_Ui_Dialog(Ui_Dialog):
 
 	def OpenPatrons(self, Dialog):
 		dia = QtWidgets.QDialog()
-		
-		f = open("patrons.txt", "r", encoding="utf-8")
-		c = f.read()
+		with open("patrons.txt", "r", encoding="utf-8") as f:
+		  c = f.read()
 
 		dia.setObjectName("Dialog")
 		dia.resize(500, 600)
